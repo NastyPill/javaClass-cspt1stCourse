@@ -1,10 +1,12 @@
 package longArithm;
 
-import org.jetbrains.annotations.NotNull;
-
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class DecimalNumber {
+
+    private static final int BETA = 10000;
 
     private String fractionalPart;
     private String integerPart;
@@ -15,7 +17,7 @@ public class DecimalNumber {
      *   which are strings
      */
 
-    public DecimalNumber(String fractionalPart, String integerPart) {
+    public DecimalNumber(String integerPart, String fractionalPart) {
         this.fractionalPart = fractionalPart;
         this.integerPart = integerPart;
         setNumber();
@@ -24,11 +26,25 @@ public class DecimalNumber {
     //  Construct Decimal number from primitive
 
     public DecimalNumber(Number number) {
-        setParts(number);
+        setPrimitive(number);
         setNumber();
     }
 
-    private void setParts(Number number) {
+    //  Construct Decimal number from string
+
+    public DecimalNumber(String number) {
+        this.number = new StringBuilder(number);
+        if (number.contains(".")) {
+            String[] s = number.split("\\.");
+            integerPart = s[0];
+            fractionalPart = s[1];
+        } else {
+            integerPart = number;
+            fractionalPart = null;
+        }
+    }
+
+    private void setPrimitive(Number number) {
         if (number instanceof Long) {
             integerPart = Long.toString(number.longValue());
         }
@@ -58,29 +74,82 @@ public class DecimalNumber {
         return number.toString();
     }
 
-    private String reverseString(String number) {
-        return new StringBuilder(number).reverse().toString();
+    private String addZerosToString(String number, int zeros) {
+        StringBuilder result = new StringBuilder(number);
+        for (int i = 0; i < zeros; i++) {
+            result.append("0");
+        }
+        System.out.println(result);
+        return result.toString();
     }
 
-    //array represents number like xxxx * 10^i
+    //array represents number like xxxx * 1000^i
 
-    private int[] setPowArray(String number) {
-        int size = number.length() / 4 + 1;
+    private int[] setPowArray(String number, int zeros) {
+        String editedNum = addZerosToString(number, zeros);
+        Number n = editedNum.length();
+        System.out.println(Math.ceil(n.doubleValue() / 4));
+        int size = (int) Math.ceil(n.doubleValue() / 4);
         int[] powArray = new int[size];
-        String reversedNum = reverseString(number);
-        for (int i = 0; i < size; i++) {
+        for (int i = size - 1; i >= 0; i--) {
             int endIndex = (i + 1) * 4;
-            if((i + 1) * 4 > number.length() - 1) {
-                endIndex = number.length() - 1;
+            if ((i + 1) * 4 > editedNum.length() - 1) {
+                endIndex = editedNum.length() - 1;
             }
-            powArray[0] = Integer.parseInt(reversedNum.substring(i * 4, endIndex));
+
+            if (endIndex != i * 4) {
+                powArray[i] = Integer.parseInt(editedNum.substring(i * 4, endIndex));
+            } else {
+                powArray[i] = editedNum.charAt(endIndex) - '0';
+            }
+            System.out.println("pow arr " + powArray[i] + " " + i);
         }
         return powArray;
     }
 
+    //returns a + b as a string
+
     public String sum(DecimalNumber other, int accuracy) {
-        //TODO()
-        throw new UnsupportedOperationException();
+        StringBuilder result = new StringBuilder();
+        ArrayList<Integer> fractList = new ArrayList<>();
+        ArrayList<Integer> intList = new ArrayList<>();
+
+        //Summ fractal part of number
+        {
+            Boolean moreThanOne = false;
+            int zeros = this.fractionalPart.length() - other.fractionalPart.length();
+            int[] thisArray = setPowArray(this.fractionalPart, zeros > 0 ? 0 : -zeros);
+            int[] otherArray = setPowArray(other.fractionalPart, zeros > 0 ? zeros : 0);
+
+            for (int i = thisArray.length - 1; i >= 0; i--) {
+                int sum = thisArray[i] + otherArray[i];
+                if (i == 0 && sum >= BETA) {
+                    moreThanOne = true;
+                    sum -= BETA;
+                    fractList.add(sum);
+                } else {
+                    if (sum >= BETA) {
+                        System.out.println("not ok");
+                        thisArray[i - 1] += 1;
+                        sum -= BETA;
+                        fractList.add(sum);
+                    } else {
+                        System.out.println("ok");
+                        fractList.add(sum);
+                    }
+                }
+                System.out.println(sum + "\t" + i);
+            }
+        }
+
+        for (int i = intList.size() - 1; i >= 0; i--) {
+            result.append(intList.get(i));
+        }
+        result.append('.');
+        for (int i = fractList.size() - 1; i >= 0; i--) {
+            result.append(fractList.get(i));
+        }
+        return result.toString();
     }
 
     public String difference(DecimalNumber other, int accuracy) {
