@@ -8,6 +8,10 @@ public class DecimalNumber {
 
     private String fractionalPart;
     private String integerPart;
+    /*
+     *  full representation of number
+     *  contains: intPart + "." + fractPart
+     */
     private StringBuilder number;
 
     private Boolean moreThanOne = false;
@@ -21,6 +25,10 @@ public class DecimalNumber {
         this.fractionalPart = fractionalPart;
         this.integerPart = integerPart;
         setNumber();
+    }
+
+    public DecimalNumber() {
+
     }
 
     //  Construct Decimal number from primitive
@@ -137,8 +145,10 @@ public class DecimalNumber {
         return result;
     }
 
-    public String sum(DecimalNumber other, int accuracy) {
-        StringBuilder result = new StringBuilder();
+    public DecimalNumber sum(DecimalNumber other, int accuracy) {
+        DecimalNumber result = new DecimalNumber();
+        StringBuilder resIntPart = new StringBuilder();
+        StringBuilder resFractPart = new StringBuilder();
 
         //fill list for fractPart
         int zeros = this.fractionalPart.length() - other.fractionalPart.length();
@@ -155,35 +165,32 @@ public class DecimalNumber {
         //adding int part
         for (int i = intList.size() - 1; i >= 0; i--) {
             if (moreThanOne && i == 0) {
-                result.append(intList.get(i) + 1);
+                resIntPart.append(intList.get(i) + 1);
             } else {
-                result.append(intList.get(i));
+                resIntPart.append(intList.get(i));
             }
             if (intList.get(i) >= BETA && intList.size() > 1) {
-                result.deleteCharAt(result.length() - 5);
+                resIntPart.deleteCharAt(resIntPart.length() - 5);
             }
         }
 
         //if there's no int part
-        if (result.length() == 0) {
+        if (resIntPart.length() == 0) {
             if (moreThanOne) {
-                result.append(1);
+                resIntPart.append(1);
             } else {
-                result.append(0);
+                resIntPart.append(0);
             }
         }
-        //if fract part exists
-        if (!fractList.isEmpty())
-            result.append('.');
 
         //adding fract part
         for (int i = fractList.size() - 1; i >= 0; i--) {
-            result.append(fractList.get(i));
+            resFractPart.append(fractList.get(i));
             if (fractList.get(i) >= BETA) {
-                result.deleteCharAt(result.length() - 5);
+                resFractPart.deleteCharAt(resFractPart.length() - 5);
             }
         }
-        return result.toString();
+        return new DecimalNumber(resIntPart.toString(), resFractPart.toString());
     }
 
     public String difference(DecimalNumber other, int accuracy) {
@@ -196,8 +203,22 @@ public class DecimalNumber {
         throw new UnsupportedOperationException();
     }
 
-    public String round(DecimalNumber number, int accuracy) {
-        //TODO()
+    private DecimalNumber round(DecimalNumber num, int accuracy) {
+        StringBuilder number = new StringBuilder(num.fractionalPart);
+        Boolean success = false;
+        Boolean addOneToInt = false;
+        if (number.charAt(accuracy) < '5') {
+            num.fractionalPart = number.substring(0, accuracy);
+            return num;
+        }
+        if (number.charAt(accuracy) >= '5' && number.charAt(accuracy - 1) < '9') {
+            char c = (char) (number.charAt(accuracy - 1) + 1);
+            number.replace(accuracy - 1, accuracy, Character.toString(c));
+            num.fractionalPart = number.substring(0, accuracy);
+            return num;
+        } else { //if we need to increase a next digit
+
+        }
         throw new UnsupportedOperationException();
     }
 
