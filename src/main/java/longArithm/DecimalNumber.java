@@ -14,6 +14,7 @@ public class DecimalNumber {
      */
     private StringBuilder number;
 
+    private Boolean isInt = false;
     private Boolean moreThanOne = false;
 
     /*
@@ -79,6 +80,7 @@ public class DecimalNumber {
     }
 
     public String getNumber() {
+        setNumber();
         return number.toString();
     }
 
@@ -126,22 +128,21 @@ public class DecimalNumber {
         for (int i = 0; i < thisArray.length; i++) {
             int sum = thisArray[i] + otherArray[i];
             if (i == thisArray.length - 1 && sum >= BETA) {
-                moreThanOne = true;
+                if (!isInt) {
+                    moreThanOne = true;
+                }
                 result.add(sum);
             } else {
                 if (sum >= BETA) {
-//                    System.out.println("not ok ->" + thisArray[i] + " " + otherArray[i]);
-//                    System.out.println(thisArray[i-1]);
                     thisArray[i + 1] += 1;
-//                    System.out.println(thisArray[i-1]);
                     result.add(sum);
                 } else {
-                    //System.out.print("ok ->");
                     result.add(sum);
                 }
             }
             System.out.println(thisArray[i] + " + " + otherArray[i] + " = " + sum);
         }
+        isInt = true;
         return result;
     }
 
@@ -190,7 +191,12 @@ public class DecimalNumber {
                 resFractPart.deleteCharAt(resFractPart.length() - 5);
             }
         }
-        return new DecimalNumber(resIntPart.toString(), resFractPart.toString());
+
+        //init false every logical variable
+        moreThanOne = false;
+        isInt = false;
+        return round(new DecimalNumber(resIntPart.toString(), resFractPart.toString()), accuracy);
+
     }
 
     public String difference(DecimalNumber other, int accuracy) {
@@ -205,21 +211,60 @@ public class DecimalNumber {
 
     private DecimalNumber round(DecimalNumber num, int accuracy) {
         StringBuilder number = new StringBuilder(num.fractionalPart);
-        Boolean success = false;
-        Boolean addOneToInt = false;
-        if (number.charAt(accuracy) < '5') {
-            num.fractionalPart = number.substring(0, accuracy);
-            return num;
-        }
-        if (number.charAt(accuracy) >= '5' && number.charAt(accuracy - 1) < '9') {
-            char c = (char) (number.charAt(accuracy - 1) + 1);
-            number.replace(accuracy - 1, accuracy, Character.toString(c));
-            num.fractionalPart = number.substring(0, accuracy);
-            return num;
-        } else { //if we need to increase a next digit
+        try {
+            if (number.charAt(accuracy) < '5') {
+                num.fractionalPart = number.substring(0, accuracy);
+                return num;
+            }
 
+            if (number.charAt(accuracy) >= '5' && number.charAt(accuracy - 1) < '9') {
+                char c = (char) (number.charAt(accuracy - 1) + 1);
+                number.replace(accuracy - 1, accuracy, Character.toString(c));
+                num.fractionalPart = number.substring(0, accuracy);
+                return num;
+            } else {
+                Boolean additionalDigit = false;
+                Boolean posShift = false;
+                int lengthOfInt = num.integerPart.length();
+                int position = accuracy + num.integerPart.length();
+                number = new StringBuilder(num.integerPart + num.fractionalPart);
+
+                while (true) {
+                    if (number.charAt(position - 1) == '9' || posShift) {
+                        posShift = false;
+                        if (position > 1) {
+                            // xxx.xxx9 -> xxx.xx(x+1)0
+                            number.replace(position - 1, position, "0");
+                            if (number.charAt(position - 2) == '9') {
+                                posShift = true;
+                                number.replace(position - 2, position - 1, "0");
+                            } else {
+                                char c = (char) (number.charAt(position - 2) + 1);
+                                number.replace(position - 2, position - 1, Character.toString(c));
+                            }
+                        } else {
+                            additionalDigit = true;
+                            number.insert(0, '1');
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
+                    position--;
+                }
+
+                if (additionalDigit) {
+                    lengthOfInt++;
+                }
+
+                num.integerPart = number.substring(0, lengthOfInt);
+                num.fractionalPart = number.substring(lengthOfInt, lengthOfInt + accuracy);
+                return num;
+            }
+        } catch (StringIndexOutOfBoundsException ex) {
+            System.err.println("Accuracy value: " + accuracy + " is illegal, because of number's length");
+            throw ex;
         }
-        throw new UnsupportedOperationException();
     }
 
     public Number getStandartType(DecimalNumber number, standartTypes type) {
