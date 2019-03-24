@@ -1,5 +1,5 @@
 package longArithm;
 
-public enum standartTypes {
+public enum StandartTypes {
     DOUBLE, FLOAT, INT, LONG
 }
