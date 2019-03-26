@@ -14,9 +14,13 @@ public class DecimalNumber {
      */
     private StringBuilder number;
 
+    private int countOfDigits;
+
     private Boolean isInt = false;
     private Boolean moreThanOne = false;
     private Boolean lessThanOne = false;
+    private Boolean negative = false;
+    private Boolean thisBigger = false;
 
     /*
      *   Construct Decimal number from two parts
@@ -86,6 +90,9 @@ public class DecimalNumber {
     }
 
     private String addZerosToString(String number, int zeros, Boolean isInt) {
+        if (zeros < 1) {
+            return number;
+        }
         StringBuilder result = new StringBuilder();
         if (isInt) {
             for (int i = 0; i < zeros; i++) {
@@ -147,32 +154,77 @@ public class DecimalNumber {
         return result;
     }
 
+    public Boolean whatIsBigger(DecimalNumber other) {
+        if(this.integerPart.length() > other.integerPart.length()) {
+            return true;
+        } else if (this.integerPart.length() < other.integerPart.length()){
+                return false;
+        } else {
+            for (int i = 0; i < this.integerPart.length(); i++) {
+                if (this.integerPart.charAt(i) > other.integerPart.charAt(i)) {
+                    return true;
+                } else if (this.integerPart.charAt(i) < other.integerPart.charAt(i)) {
+                    return false;
+                }
+            }
+            for (int i = 0; i < Math.min(this.fractionalPart.length(), other.fractionalPart.length()); i++) {
+                if(this.fractionalPart.charAt(i) > other.fractionalPart.charAt(i)) {
+                    return true;
+                } else if (this.fractionalPart.charAt(i) < other.fractionalPart.charAt(i)) {
+                    return false;
+                }
+            }
+            if (Math.min(this.fractionalPart.length(), other.fractionalPart.length()) == this.fractionalPart.length()) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
     private ArrayList<Integer> differentiator(int[] thisArray, int[] otherArray) {
+        System.out.println(thisBigger);
         ArrayList<Integer> result = new ArrayList<>();
         int[] maxArray;
         int[] minArray;
 
         for (int i = 0; i < thisArray.length; i++) {
             int res = thisArray[i] - otherArray[i];
-            if (i == thisArray.length - 1 && res < 0) {
-                if (!isInt) {
-                    lessThanOne = true;
-                }
-                result.add(res);
+            if(!thisBigger) {
+                negative = true;
+                res = Math.abs(otherArray[i] - thisArray[i]);
+                System.out.println(otherArray[i] + " - " + thisArray[i] + " = " + res);
             } else {
-                if (res < 0) {
-                    thisArray[i + 1] -= 1;
-                    result.add(res + BETA);
+                if (i == thisArray.length - 1 && res < 0) {
+                    if (!this.integerPart.equals("0")) {
+                        if (!isInt) {
+                            lessThanOne = true;
+                            if (thisArray[i] < 10) {
+                                res = res + 10;
+                            } else if (thisArray[i] < 100) {
+                                res = res + 100;
+                            } else if (thisArray[i] < 1000) {
+                                res = res + 1000;
+                            } else {
+                                res = res + BETA;
+                            }
+                        } else {
+                            res = res;
+                        }
+                    } else {
+                        res = res * -1;
+                    }
                 } else {
-                    result.add(res);
+                    if (res < 0) {
+                        thisArray[i + 1] -= 1;
+                        res = res + BETA;
+                    }
                 }
+                System.out.println(thisArray[i] + " - " + otherArray[i] + " = " + res);
             }
-            System.out.println(thisArray[i] + " - " + otherArray[i] + " = " + res);
+            result.add(res);
         }
 
-        if (lessThanOne && !isInt) {
-            result.remove(0);
-        }
         System.out.println(result);
         isInt = true;
         return result;
@@ -190,6 +242,7 @@ public class DecimalNumber {
             int zeros = this.fractionalPart.length() - other.fractionalPart.length();
             thisArray = setPowArray(this.fractionalPart, zeros > 0 ? 0 : -zeros, false);
             otherArray = setPowArray(other.fractionalPart, zeros > 0 ? zeros : 0, false);
+            countOfDigits = Integer.toString(thisArray[thisArray.length - 1]).length();
         }
 
         switch (type) {
@@ -216,14 +269,22 @@ public class DecimalNumber {
         StringBuilder result = new StringBuilder();
         //adding int part
         for (int i = intList.size() - 1; i >= 0; i--) {
+            String strValue = "";
+            int value = intList.get(i);
             if (moreThanOne && i == 0) {
-                result.append(intList.get(i) + 1);
+                value++;
             } else if (lessThanOne && i == 0) {
-                result.append(intList.get(i) - 1);
-            } else {
-                result.append(intList.get(i));
+                value--;
             }
-            if (intList.get(i) > BETA && intList.size() > 1) {
+            if (i != 0) {
+                strValue = addZerosToString(Integer.toString(Math.abs(value)),
+                        4 - Integer.toString(Math.abs(value)).length(), true);
+                result.append(strValue);
+            } else {
+                result.append(value);
+            }
+
+            if (value > BETA && intList.size() > 1) {
                 result.deleteCharAt(result.length() - 5);
             }
         }
@@ -232,26 +293,43 @@ public class DecimalNumber {
         if (result.length() == 0) {
             if (moreThanOne) {
                 result.append(1);
-            } else if (lessThanOne) {
-                result.append(-1);
             } else {
                 result.append(0);
             }
         }
 
+        if (negative) {
+            result.insert(0, "-");
+        }
         return result;
     }
 
     public StringBuilder createFractPart(ArrayList<Integer> fractList) {
         StringBuilder result = new StringBuilder();
         for (int i = fractList.size() - 1; i >= 0; i--) {
-            result.append(fractList.get(i));
-            if (fractList.get(i) >= BETA) {
+            int value = fractList.get(i);
+            String strValue;
+            if (i == fractList.size() - 1) {
+                strValue = addZerosToString(Integer.toString(Math.abs(value)),
+                        countOfDigits - Integer.toString(Math.abs(value)).length(), true);
+            } else {
+                strValue = addZerosToString(Integer.toString(Math.abs(value)),
+                        4 - Integer.toString(Math.abs(value)).length(), true);
+            }
+            result.append(strValue);
+            if (value >= BETA) {
                 result.deleteCharAt(result.length() - 5);
             }
         }
 
         return result;
+    }
+
+    private void reinit() {
+        lessThanOne = false;
+        moreThanOne = false;
+        isInt = false;
+        negative = false;
     }
 
     private DecimalNumber resulting(DecimalNumber other, int accuracy, OperationType type) {
@@ -260,14 +338,9 @@ public class DecimalNumber {
         String fractString = createFractPart(fillList(other, false, type)).toString();
         String intString = createIntPart(fillList(other, true, type)).toString();
 
-        System.out.println(intString + " " + fractString);
-
         result = round(new DecimalNumber(intString, fractString), accuracy);
 
-
-        lessThanOne = false;
-        moreThanOne = false;
-        isInt = false;
+        reinit();
 
         return result;
     }
@@ -278,6 +351,7 @@ public class DecimalNumber {
     }
 
     public DecimalNumber difference(DecimalNumber other, int accuracy) {
+        thisBigger = whatIsBigger(other);
         return resulting(other, accuracy, OperationType.DIFF);
     }
 
