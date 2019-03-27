@@ -21,6 +21,7 @@ public class DecimalNumber {
     private Boolean lessThanOne = false;
     private Boolean negative = false;
     private Boolean thisBigger = false;
+    private Boolean fracPartNull = false;
 
     /*
      *   Construct Decimal number from two parts
@@ -30,6 +31,7 @@ public class DecimalNumber {
     public DecimalNumber(String integerPart, String fractionalPart) {
         this.fractionalPart = fractionalPart;
         this.integerPart = integerPart;
+        ifEmpty();
         setNumber();
     }
 
@@ -41,6 +43,7 @@ public class DecimalNumber {
 
     public DecimalNumber(Number number) {
         setPrimitive(number);
+        ifEmpty();
         setNumber();
     }
 
@@ -54,7 +57,18 @@ public class DecimalNumber {
             fractionalPart = s[1];
         } else {
             integerPart = number;
-            fractionalPart = null;
+            fractionalPart = "0";
+        }
+        setNumber();
+    }
+
+    private void ifEmpty() {
+        if (this.fractionalPart.isEmpty()) {
+            this.fractionalPart = "0";
+        }
+        if (this.integerPart.isEmpty()) {
+            this.integerPart = "0";
+            fracPartNull = true;
         }
     }
 
@@ -86,7 +100,10 @@ public class DecimalNumber {
 
     public String getNumber() {
         setNumber();
-        return number.toString();
+        if (fracPartNull) {
+            return this.integerPart;
+        }
+        return this.number.toString();
     }
 
     private String addZerosToString(String number, int zeros, Boolean isInt) {
@@ -145,20 +162,25 @@ public class DecimalNumber {
                     thisArray[i + 1] += 1;
                     result.add(sum);
                 } else {
+                    if(!isInt && i == thisArray.length - 1) {
+                        if (Integer.toString(sum).length() > Integer.toString(thisArray[i]).length()) {
+                            moreThanOne = true;
+                            sum %= Math.pow(10, Integer.toString(thisArray[i]).length());
+                        }
+                    }
                     result.add(sum);
                 }
             }
-            System.out.println(thisArray[i] + " + " + otherArray[i] + " = " + sum);
         }
         isInt = true;
         return result;
     }
 
-    public Boolean whatIsBigger(DecimalNumber other) {
-        if(this.integerPart.length() > other.integerPart.length()) {
+    private Boolean whatIsBigger(DecimalNumber other) {
+        if (this.integerPart.length() > other.integerPart.length()) {
             return true;
-        } else if (this.integerPart.length() < other.integerPart.length()){
-                return false;
+        } else if (this.integerPart.length() < other.integerPart.length()) {
+            return false;
         } else {
             for (int i = 0; i < this.integerPart.length(); i++) {
                 if (this.integerPart.charAt(i) > other.integerPart.charAt(i)) {
@@ -168,7 +190,7 @@ public class DecimalNumber {
                 }
             }
             for (int i = 0; i < Math.min(this.fractionalPart.length(), other.fractionalPart.length()); i++) {
-                if(this.fractionalPart.charAt(i) > other.fractionalPart.charAt(i)) {
+                if (this.fractionalPart.charAt(i) > other.fractionalPart.charAt(i)) {
                     return true;
                 } else if (this.fractionalPart.charAt(i) < other.fractionalPart.charAt(i)) {
                     return false;
@@ -190,7 +212,7 @@ public class DecimalNumber {
 
         for (int i = 0; i < thisArray.length; i++) {
             int res = thisArray[i] - otherArray[i];
-            if(!thisBigger) {
+            if (!thisBigger) {
                 negative = true;
                 res = Math.abs(otherArray[i] - thisArray[i]);
                 System.out.println(otherArray[i] + " - " + thisArray[i] + " = " + res);
@@ -220,7 +242,6 @@ public class DecimalNumber {
                         res = res + BETA;
                     }
                 }
-                System.out.println(thisArray[i] + " - " + otherArray[i] + " = " + res);
             }
             result.add(res);
         }
@@ -265,7 +286,7 @@ public class DecimalNumber {
     }
 
 
-    public StringBuilder createIntPart(ArrayList<Integer> intList) {
+    private StringBuilder createIntPart(ArrayList<Integer> intList) {
         StringBuilder result = new StringBuilder();
         //adding int part
         for (int i = intList.size() - 1; i >= 0; i--) {
@@ -276,7 +297,7 @@ public class DecimalNumber {
             } else if (lessThanOne && i == 0) {
                 value--;
             }
-            if (i != 0) {
+            if (i != intList.size() - 1) {
                 strValue = addZerosToString(Integer.toString(Math.abs(value)),
                         4 - Integer.toString(Math.abs(value)).length(), true);
                 result.append(strValue);
@@ -304,7 +325,7 @@ public class DecimalNumber {
         return result;
     }
 
-    public StringBuilder createFractPart(ArrayList<Integer> fractList) {
+    private StringBuilder createFractPart(ArrayList<Integer> fractList) {
         StringBuilder result = new StringBuilder();
         for (int i = fractList.size() - 1; i >= 0; i--) {
             int value = fractList.get(i);
@@ -347,7 +368,6 @@ public class DecimalNumber {
 
     public DecimalNumber sum(DecimalNumber other, int accuracy) {
         return resulting(other, accuracy, OperationType.SUM);
-
     }
 
     public DecimalNumber difference(DecimalNumber other, int accuracy) {
@@ -361,6 +381,10 @@ public class DecimalNumber {
     }
 
     private DecimalNumber round(DecimalNumber num, int accuracy) {
+        //-1 if no need in rounding
+        if (accuracy == -1) {
+            return num;
+        }
         StringBuilder number = new StringBuilder(num.fractionalPart);
         if (accuracy >= num.fractionalPart.length()) {
             return new DecimalNumber(num.integerPart, num.fractionalPart);
@@ -416,22 +440,61 @@ public class DecimalNumber {
         }
     }
 
-    public Number getStandartType(DecimalNumber number, StandartTypes type) {
+    private Boolean shouldBeIncreased() {
+        if (this.fractionalPart.charAt(0) > '4') {
+            return true;
+        }
+        return false;
+    }
+
+    public Number getStandartType(StandartTypes type) {
         switch (type) {
             case INT: {
-
+                try {
+                    if (this.shouldBeIncreased()) {
+                        return Integer.parseInt(this.integerPart) + 1;
+                    } else {
+                        return Integer.parseInt(this.integerPart);
+                    }
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace(System.err);
+                }
             }
+            break;
+
             case LONG: {
-
+                try {
+                    if (this.shouldBeIncreased()) {
+                        System.out.println("SS");
+                        return Long.parseLong(this.integerPart) + 1;
+                    } else {
+                        System.out.println("ss");
+                        return Long.parseLong(this.integerPart);
+                    }
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace(System.err);
+                }
             }
+            break;
+
             case DOUBLE: {
-
+                try {
+                    return Double.parseDouble(this.getNumber());
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace(System.err);
+                }
             }
+            break;
+
             case FLOAT: {
-
+                try {
+                    return Float.parseFloat(this.getNumber());
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace(System.err);
+                }
             }
-            default:
-                throw new IllegalArgumentException();
+            break;
         }
+        throw new IllegalArgumentException();
     }
 }
