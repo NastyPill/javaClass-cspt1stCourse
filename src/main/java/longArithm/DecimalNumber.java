@@ -100,7 +100,7 @@ public class DecimalNumber {
 
     public String getNumber() {
         setNumber();
-        if (fracPartNull) {
+        if (fracPartNull || fractPartIsZero(this.fractionalPart)) {
             return this.integerPart;
         }
         return this.number.toString();
@@ -140,6 +140,7 @@ public class DecimalNumber {
                 digits.insert(0, editedNum.charAt(editedNum.length() - 1));
                 editedNum.deleteCharAt(editedNum.length() - 1);
             }
+            countOfDigits = digits.length();
             powArray[size - i - 1] = Integer.parseInt(digits.toString());
         }
 
@@ -162,11 +163,10 @@ public class DecimalNumber {
                     thisArray[i + 1] += 1;
                     result.add(sum);
                 } else {
-                    if(!isInt && i == thisArray.length - 1) {
-                        if (Integer.toString(sum).length() > Integer.toString(thisArray[i]).length()) {
-                            moreThanOne = true;
-                            sum %= Math.pow(10, Integer.toString(thisArray[i]).length());
-                        }
+                    if (!isInt && i == thisArray.length - 1 && Integer.toString(sum).length() > countOfDigits) {
+                        System.out.println(countOfDigits);
+                        moreThanOne = true;
+                        sum %= Math.pow(10, Integer.toString(thisArray[i]).length());
                     }
                     result.add(sum);
                 }
@@ -263,7 +263,6 @@ public class DecimalNumber {
             int zeros = this.fractionalPart.length() - other.fractionalPart.length();
             thisArray = setPowArray(this.fractionalPart, zeros > 0 ? 0 : -zeros, false);
             otherArray = setPowArray(other.fractionalPart, zeros > 0 ? zeros : 0, false);
-            countOfDigits = Integer.toString(thisArray[thisArray.length - 1]).length();
         }
 
         switch (type) {
@@ -285,6 +284,17 @@ public class DecimalNumber {
         }
     }
 
+    private Boolean fractPartIsZero(String fractPart) {
+        Boolean zero = true;
+        System.out.println(fractPart);
+        for (int i = 0; i < fractPart.length(); i++) {
+            if (fractPart.charAt(i) != '0') {
+                zero = false;
+            }
+        }
+        System.out.println(zero);
+        return zero;
+    }
 
     private StringBuilder createIntPart(ArrayList<Integer> intList) {
         StringBuilder result = new StringBuilder();

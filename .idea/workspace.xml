@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3295e106-99d7-47c3-8606-8589d312171d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/longArithm/DecimalNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/longArithm/DecimalNumber.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/longArithm/MainClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/longArithm/MainClass.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/longArithm/DecimalNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/longArithm/DecimalNumber.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/longArithm/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/longArithm/MainClass.java" afterDir="false" />
     </list>
@@ -30,6 +34,10 @@
     </option>
     <expand />
     <select />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -98,24 +106,19 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/DecimalNumber.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="166" column="47" selection-start-line="166" selection-start-column="47" selection-end-line="166" selection-end-column="47" />
+            <state relative-caret-position="-2990">
+              <caret line="102" column="63" selection-start-line="102" selection-start-column="63" selection-end-line="102" selection-end-column="63" />
               <folding>
-                <element signature="method#DecimalNumber#0;class#DecimalNumber#0" />
                 <element signature="method#DecimalNumber#1;class#DecimalNumber#0" />
                 <element signature="method#DecimalNumber#2;class#DecimalNumber#0" />
                 <element signature="method#DecimalNumber#3;class#DecimalNumber#0" />
-                <element signature="method#ifEmpty#0;class#DecimalNumber#0" />
                 <element signature="method#setPrimitive#0;class#DecimalNumber#0" />
                 <element signature="method#setNumber#0;class#DecimalNumber#0" />
-                <element signature="method#getNumber#0;class#DecimalNumber#0" />
                 <element signature="method#addZerosToString#0;class#DecimalNumber#0" />
                 <element signature="method#whatIsBigger#0;class#DecimalNumber#0" />
                 <element signature="method#differentiator#0;class#DecimalNumber#0" />
                 <element signature="method#createIntPart#0;class#DecimalNumber#0" />
-                <element signature="method#createFractPart#0;class#DecimalNumber#0" />
                 <element signature="method#reinit#0;class#DecimalNumber#0" />
-                <element signature="method#resulting#0;class#DecimalNumber#0" />
                 <element signature="method#sum#0;class#DecimalNumber#0" />
                 <element signature="method#difference#0;class#DecimalNumber#0" />
                 <element signature="method#multiplication#0;class#DecimalNumber#0" />
@@ -145,8 +148,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/MainClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+            <state relative-caret-position="48">
+              <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -176,6 +179,11 @@
       <find>nega</find>
       <find>&quot;-&quot;</find>
       <find>lessTh</find>
+      <find>ifEmpty</find>
+      <find>&quot;&quot;</find>
+      <find>getNumber</find>
+      <find>countOf</find>
+      <find>countOfD</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -187,8 +195,8 @@
         <option value="$PROJECT_DIR$/src/main/java/longArithm/enumOfStandartTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/longArithm/standartTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/longArithm/OperationType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/longArithm/MainClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/longArithm/DecimalNumber.java" />
+        <option value="$PROJECT_DIR$/src/main/java/longArithm/MainClass.java" />
       </list>
     </option>
   </component>
@@ -203,8 +211,8 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -212,10 +220,14 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553674120082" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553674130295" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../lab-1" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -298,18 +310,19 @@
       <workItem from="1553472836127" duration="3211000" />
       <workItem from="1553515471985" duration="2219000" />
       <workItem from="1553614885884" duration="5258000" />
-      <workItem from="1553671557806" duration="2465000" />
+      <workItem from="1553671557806" duration="2856000" />
+      <workItem from="1553852224549" duration="2251000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48078000" />
+    <option name="totallyTimeSpent" value="50720000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="25" width="1311" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2537431" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25768322" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -320,7 +333,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.36334404" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997114" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39871383" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -403,13 +416,6 @@
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/OperationType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -424,33 +430,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/OperationType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/MainClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+        <state relative-caret-position="48">
+          <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/DecimalNumber.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="166" column="47" selection-start-line="166" selection-start-column="47" selection-end-line="166" selection-end-column="47" />
+        <state relative-caret-position="-2990">
+          <caret line="102" column="63" selection-start-line="102" selection-start-column="63" selection-end-line="102" selection-end-column="63" />
           <folding>
-            <element signature="method#DecimalNumber#0;class#DecimalNumber#0" />
             <element signature="method#DecimalNumber#1;class#DecimalNumber#0" />
             <element signature="method#DecimalNumber#2;class#DecimalNumber#0" />
             <element signature="method#DecimalNumber#3;class#DecimalNumber#0" />
-            <element signature="method#ifEmpty#0;class#DecimalNumber#0" />
             <element signature="method#setPrimitive#0;class#DecimalNumber#0" />
             <element signature="method#setNumber#0;class#DecimalNumber#0" />
-            <element signature="method#getNumber#0;class#DecimalNumber#0" />
             <element signature="method#addZerosToString#0;class#DecimalNumber#0" />
             <element signature="method#whatIsBigger#0;class#DecimalNumber#0" />
             <element signature="method#differentiator#0;class#DecimalNumber#0" />
             <element signature="method#createIntPart#0;class#DecimalNumber#0" />
-            <element signature="method#createFractPart#0;class#DecimalNumber#0" />
             <element signature="method#reinit#0;class#DecimalNumber#0" />
-            <element signature="method#resulting#0;class#DecimalNumber#0" />
             <element signature="method#sum#0;class#DecimalNumber#0" />
             <element signature="method#difference#0;class#DecimalNumber#0" />
             <element signature="method#multiplication#0;class#DecimalNumber#0" />
