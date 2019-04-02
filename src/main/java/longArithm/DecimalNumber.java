@@ -1,6 +1,7 @@
 package longArithm;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DecimalNumber {
 
@@ -15,6 +16,7 @@ public class DecimalNumber {
     private StringBuilder number;
 
     private int countOfDigits;
+    private int zerosAfterMulti;
 
     private Boolean isInt = false;
     private Boolean moreThanOne = false;
@@ -196,19 +198,13 @@ public class DecimalNumber {
                     return false;
                 }
             }
-            if (Math.min(this.fractionalPart.length(), other.fractionalPart.length()) == this.fractionalPart.length()) {
-                return false;
-            } else {
-                return true;
-            }
+            return Math.min(this.fractionalPart.length(), other.fractionalPart.length()) != this.fractionalPart.length();
         }
     }
 
     private ArrayList<Integer> differentiator(int[] thisArray, int[] otherArray) {
         System.out.println(thisBigger);
         ArrayList<Integer> result = new ArrayList<>();
-        int[] maxArray;
-        int[] minArray;
 
         for (int i = 0; i < thisArray.length; i++) {
             int res = thisArray[i] - otherArray[i];
@@ -246,7 +242,6 @@ public class DecimalNumber {
             result.add(res);
         }
 
-        System.out.println(result);
         isInt = true;
         return result;
     }
@@ -274,25 +269,50 @@ public class DecimalNumber {
                 return differentiator(thisArray, otherArray);
             }
 
-            case MULTI: {
-                throw new UnsupportedOperationException();
-            }
-
             default: {
                 throw new UnsupportedOperationException();
             }
         }
     }
 
+    private DecimalNumber multiplicator(DecimalNumber other, int accuracy) {
+        ArrayList<Integer> result = new ArrayList<>();
+        ArrayList<DecimalNumber> nums = new ArrayList<>();
+        int zeros = this.integerPart.length() - other.integerPart.length();
+        int[] thisArray = setPowArray(this.getNumber().replace(".", ""), zeros > 0 ? 0 : -zeros, true);
+        int[] otherArray = setPowArray(other.getNumber().replace(".", ""), zeros > 0 ? zeros : 0, true);
+        for (int value : otherArray) {
+            for (int i = 0; i < thisArray.length; i++) {
+                System.out.println(i + "-=>" + thisArray[i] + ",,," + value);
+                int res = thisArray[i] * value;
+                if (res >= BETA && i != thisArray.length - 1) {
+                    res %= BETA;
+                    thisArray[i + 1] += res / BETA;
+                }
+                result.add(res);
+                System.out.println(i + "->" + res);
+            }
+            StringBuilder num = new StringBuilder();
+            for (Integer integer : result) {
+                num.append(integer);
+            }
+            nums.add(new DecimalNumber(num.toString()));
+        }
+        DecimalNumber resultNum = nums.get(0);
+        for (int i = 1; i < nums.size(); i++) {
+            resultNum = resultNum.sum(nums.get(i), -1);
+        }
+        return round(new DecimalNumber(new StringBuilder(resultNum.getNumber())
+                .insert(resultNum.getNumber().length() - zerosAfterMulti, ".").toString()), accuracy);
+    }
+
     private Boolean fractPartIsZero(String fractPart) {
         Boolean zero = true;
-        System.out.println(fractPart);
         for (int i = 0; i < fractPart.length(); i++) {
             if (fractPart.charAt(i) != '0') {
                 zero = false;
             }
         }
-        System.out.println(zero);
         return zero;
     }
 
@@ -300,7 +320,7 @@ public class DecimalNumber {
         StringBuilder result = new StringBuilder();
         //adding int part
         for (int i = intList.size() - 1; i >= 0; i--) {
-            String strValue = "";
+            String strValue;
             int value = intList.get(i);
             if (moreThanOne && i == 0) {
                 value++;
@@ -366,13 +386,15 @@ public class DecimalNumber {
     private DecimalNumber resulting(DecimalNumber other, int accuracy, OperationType type) {
         DecimalNumber result;
 
-        String fractString = createFractPart(fillList(other, false, type)).toString();
-        String intString = createIntPart(fillList(other, true, type)).toString();
-
-        result = round(new DecimalNumber(intString, fractString), accuracy);
+        if (type == OperationType.MULTI) {
+            return multiplicator(other, accuracy);
+        } else {
+            String fractString = createFractPart(fillList(other, false, type)).toString();
+            String intString = createIntPart(fillList(other, true, type)).toString();
+            result = round(new DecimalNumber(intString, fractString), accuracy);
+        }
 
         reinit();
-
         return result;
     }
 
@@ -385,9 +407,16 @@ public class DecimalNumber {
         return resulting(other, accuracy, OperationType.DIFF);
     }
 
-    public String multiplication(DecimalNumber other, int accuracy) {
-        //TODO()
-        throw new UnsupportedOperationException();
+    public DecimalNumber multiplication(DecimalNumber other, int accuracy) {
+        zerosAfterMulti = 0;
+        if (this.fractPartIsZero(this.fractionalPart)) {
+            zerosAfterMulti -= 1;
+        }
+        if (other.fractPartIsZero(other.fractionalPart)) {
+            zerosAfterMulti -= 1;
+        }
+        zerosAfterMulti += this.fractionalPart.length() + other.fractionalPart.length();
+        return resulting(other, accuracy, OperationType.MULTI);
     }
 
     private DecimalNumber round(DecimalNumber num, int accuracy) {
@@ -451,10 +480,7 @@ public class DecimalNumber {
     }
 
     private Boolean shouldBeIncreased() {
-        if (this.fractionalPart.charAt(0) > '4') {
-            return true;
-        }
-        return false;
+        return this.fractionalPart.charAt(0) > '4';
     }
 
     public Number getStandartType(StandartTypes type) {
@@ -475,10 +501,8 @@ public class DecimalNumber {
             case LONG: {
                 try {
                     if (this.shouldBeIncreased()) {
-                        System.out.println("SS");
                         return Long.parseLong(this.integerPart) + 1;
                     } else {
-                        System.out.println("ss");
                         return Long.parseLong(this.integerPart);
                     }
                 } catch (NumberFormatException ex) {
@@ -506,5 +530,19 @@ public class DecimalNumber {
             break;
         }
         throw new IllegalArgumentException();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DecimalNumber that = (DecimalNumber) o;
+        return fractionalPart.equals(that.fractionalPart) &&
+                integerPart.equals(that.integerPart);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fractionalPart, integerPart);
     }
 }

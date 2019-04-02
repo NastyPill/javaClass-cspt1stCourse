@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3295e106-99d7-47c3-8606-8589d312171d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/longArithm/DecimalNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/longArithm/DecimalNumber.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/longArithm/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/longArithm/MainClass.java" afterDir="false" />
@@ -36,8 +30,7 @@
     <select />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -106,41 +99,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/DecimalNumber.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2990">
-              <caret line="102" column="63" selection-start-line="102" selection-start-column="63" selection-end-line="102" selection-end-column="63" />
+            <state relative-caret-position="535">
+              <caret line="389" column="48" selection-start-line="389" selection-start-column="48" selection-end-line="389" selection-end-column="48" />
               <folding>
-                <element signature="method#DecimalNumber#1;class#DecimalNumber#0" />
-                <element signature="method#DecimalNumber#2;class#DecimalNumber#0" />
-                <element signature="method#DecimalNumber#3;class#DecimalNumber#0" />
-                <element signature="method#setPrimitive#0;class#DecimalNumber#0" />
-                <element signature="method#setNumber#0;class#DecimalNumber#0" />
-                <element signature="method#addZerosToString#0;class#DecimalNumber#0" />
-                <element signature="method#whatIsBigger#0;class#DecimalNumber#0" />
-                <element signature="method#differentiator#0;class#DecimalNumber#0" />
-                <element signature="method#createIntPart#0;class#DecimalNumber#0" />
-                <element signature="method#reinit#0;class#DecimalNumber#0" />
-                <element signature="method#sum#0;class#DecimalNumber#0" />
-                <element signature="method#difference#0;class#DecimalNumber#0" />
-                <element signature="method#multiplication#0;class#DecimalNumber#0" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#17064#17065#0" expanded="true" />
+                <element signature="e#17122#17123#0" expanded="true" />
+                <element signature="e#18986#18987#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/OperationType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -148,17 +114,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/MainClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/StandartTypes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            <state relative-caret-position="60">
+              <caret line="5" column="54" selection-start-line="5" selection-start-column="54" selection-end-line="5" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -168,8 +125,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -184,6 +141,9 @@
       <find>getNumber</find>
       <find>countOf</find>
       <find>countOfD</find>
+      <find>multiplicator</find>
+      <find>System</find>
+      <find>&quot;0&quot;</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -195,8 +155,10 @@
         <option value="$PROJECT_DIR$/src/main/java/longArithm/enumOfStandartTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/longArithm/standartTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/longArithm/OperationType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/longArithm/DecimalNumber.java" />
+        <option value="$PROJECT_DIR$/src/main/java/longArithm/DecimalNumber.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/longArithm/DecimalNumberTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/longArithm/MainClass.java" />
+        <option value="$PROJECT_DIR$/src/main/java/longArithm/DecimalNumber.java" />
       </list>
     </option>
   </component>
@@ -210,9 +172,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -230,7 +192,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
@@ -280,9 +242,26 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="DecimalNumberTest.sumTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Long_Arithmetic_Java_Class.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="longArithm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="longArithm" />
+      <option name="MAIN_CLASS_NAME" value="longArithm.DecimalNumberTest" />
+      <option name="METHOD_NAME" value="sumTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainClass" />
+        <item itemvalue="JUnit.DecimalNumberTest.sumTest" />
         <item itemvalue="Gradle.javaClass-kspt1stCourse [init]" />
       </list>
     </recent_temporary>
@@ -311,18 +290,46 @@
       <workItem from="1553515471985" duration="2219000" />
       <workItem from="1553614885884" duration="5258000" />
       <workItem from="1553671557806" duration="2856000" />
-      <workItem from="1553852224549" duration="2251000" />
+      <workItem from="1553852224549" duration="2358000" />
+      <workItem from="1553859146531" duration="1736000" />
+      <workItem from="1554113873270" duration="5161000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="DecimalNumberTest_sumTest - 2019.04.01 at 13h 20m 47s.xml">
+      <configuration name="DecimalNumberTest.sumTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DecimalNumberTest_sumTest - 2019.04.01 at 13h 23m 30s.xml">
+      <configuration name="DecimalNumberTest.sumTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DecimalNumberTest_sumTest - 2019.04.01 at 13h 24m 54s.xml">
+      <configuration name="DecimalNumberTest.sumTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DecimalNumberTest_sumTest - 2019.04.01 at 13h 25m 14s.xml">
+      <configuration name="DecimalNumberTest.sumTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DecimalNumberTest_sumTest - 2019.04.01 at 13h 25m 42s.xml">
+      <configuration name="DecimalNumberTest.sumTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DecimalNumberTest_sumTest - 2019.04.01 at 13h 26m 52s.xml">
+      <configuration name="DecimalNumberTest.sumTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DecimalNumberTest_sumTest - 2019.04.01 at 13h 27m 01s.xml">
+      <configuration name="DecimalNumberTest.sumTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DecimalNumberTest_sumTest - 2019.04.02 at 10h 17m 57s.xml">
+      <configuration name="DecimalNumberTest.sumTest" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50720000" />
+    <option name="totallyTimeSpent" value="57724000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="25" width="1311" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25768322" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26556343" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -332,7 +339,7 @@
       <window_info id="Learn" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.36334404" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26688102" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39871383" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -416,17 +423,17 @@
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/StandartTypes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
           <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -437,31 +444,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/DecimalNumberTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="21" column="84" selection-start-line="21" selection-start-column="84" selection-end-line="21" selection-end-column="84" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/MainClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+        <state relative-caret-position="60">
+          <caret line="5" column="54" selection-start-line="5" selection-start-column="54" selection-end-line="5" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/longArithm/DecimalNumber.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2990">
-          <caret line="102" column="63" selection-start-line="102" selection-start-column="63" selection-end-line="102" selection-end-column="63" />
+        <state relative-caret-position="535">
+          <caret line="389" column="48" selection-start-line="389" selection-start-column="48" selection-end-line="389" selection-end-column="48" />
           <folding>
-            <element signature="method#DecimalNumber#1;class#DecimalNumber#0" />
-            <element signature="method#DecimalNumber#2;class#DecimalNumber#0" />
-            <element signature="method#DecimalNumber#3;class#DecimalNumber#0" />
-            <element signature="method#setPrimitive#0;class#DecimalNumber#0" />
-            <element signature="method#setNumber#0;class#DecimalNumber#0" />
-            <element signature="method#addZerosToString#0;class#DecimalNumber#0" />
-            <element signature="method#whatIsBigger#0;class#DecimalNumber#0" />
-            <element signature="method#differentiator#0;class#DecimalNumber#0" />
-            <element signature="method#createIntPart#0;class#DecimalNumber#0" />
-            <element signature="method#reinit#0;class#DecimalNumber#0" />
-            <element signature="method#sum#0;class#DecimalNumber#0" />
-            <element signature="method#difference#0;class#DecimalNumber#0" />
-            <element signature="method#multiplication#0;class#DecimalNumber#0" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#17064#17065#0" expanded="true" />
+            <element signature="e#17122#17123#0" expanded="true" />
+            <element signature="e#18986#18987#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -523,7 +531,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
