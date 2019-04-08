@@ -97,6 +97,9 @@ public class DecimalNumber {
 
     public DecimalNumber(String number) {
         this.number = new StringBuilder(number);
+        if (number.contains(".") && number.length() == 2) {
+            number += "0";
+        }
         if (number.contains(".")) {
             String[] s = number.split("\\.");
             integerPart = s[0];
@@ -116,9 +119,18 @@ public class DecimalNumber {
         return resulting(other, accuracy, OperationType.SUM);
     }
 
+    public DecimalNumber sum(DecimalNumber other) {
+        return resulting(other, -1, OperationType.SUM);
+    }
+
     public DecimalNumber difference(DecimalNumber other, int accuracy) {
         thisBigger = whatIsBigger(other);
         return resulting(other, accuracy, OperationType.DIFF);
+    }
+
+    public DecimalNumber difference(DecimalNumber other)
+    {
+        return resulting(other, -1, OperationType.DIFF);
     }
 
     public DecimalNumber multiplication(DecimalNumber other, int accuracy) {
@@ -131,6 +143,76 @@ public class DecimalNumber {
         }
         zerosAfterMulti += this.fractionalPart.length() + other.fractionalPart.length();
         return resulting(other, accuracy, OperationType.MULTI);
+    }
+
+    public DecimalNumber multiplication(DecimalNumber other) {
+        return resulting(other, -1, OperationType.MULTI);
+    }
+
+    public String getNumber() {
+        if (fracPartNull || fractPartIsZero(this.fractionalPart)) {
+            return this.integerPart;
+        }
+        setNumber();
+        return this.number.toString();
+    }
+
+    public Number getStandartType(StandartTypes type) {
+        switch (type) {
+            case INT: {
+                try {
+                    if (this.shouldBeIncreased()) {
+                        return Integer.parseInt(this.integerPart) + 1;
+                    } else {
+                        return Integer.parseInt(this.integerPart);
+                    }
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace(System.err);
+                }
+            }
+            break;
+
+            case LONG: {
+                try {
+                    if (this.shouldBeIncreased()) {
+                        return Long.parseLong(this.integerPart) + 1;
+                    } else {
+                        return Long.parseLong(this.integerPart);
+                    }
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace(System.err);
+                }
+            }
+            break;
+
+            case DOUBLE: {
+                try {
+                    return Double.parseDouble(this.getNumber());
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace(System.err);
+                }
+            }
+            break;
+
+            case FLOAT: {
+                try {
+                    return Float.parseFloat(this.getNumber());
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace(System.err);
+                }
+            }
+            break;
+        }
+        throw new IllegalArgumentException();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DecimalNumber that = (DecimalNumber) o;
+        return fractionalPart.equals(that.fractionalPart) &&
+                integerPart.equals(that.integerPart);
     }
 
     /**
@@ -174,13 +256,7 @@ public class DecimalNumber {
         number.append(fractionalPart);
     }
 
-    public String getNumber() {
-        if (fracPartNull || fractPartIsZero(this.fractionalPart)) {
-            return this.integerPart;
-        }
-        setNumber();
-        return this.number.toString();
-    }
+
 
 
     //Adds zeros in order to make strings equals by length
@@ -516,8 +592,8 @@ public class DecimalNumber {
     //rounds num using math rules
 
     private DecimalNumber round(DecimalNumber num, int accuracy) {
-        //-1 if no need in rounding
-        if (accuracy == -1) {
+        //if no need in rounding
+        if (accuracy < 0) {
             return num;
         }
         StringBuilder number = new StringBuilder(num.fractionalPart);
@@ -581,69 +657,4 @@ public class DecimalNumber {
         return this.fractionalPart.charAt(0) > '4';
     }
 
-    //returns number as a primitive if this operation is possible
-
-    public Number getStandartType(StandartTypes type) {
-        switch (type) {
-            case INT: {
-                try {
-                    if (this.shouldBeIncreased()) {
-                        return Integer.parseInt(this.integerPart) + 1;
-                    } else {
-                        return Integer.parseInt(this.integerPart);
-                    }
-                } catch (NumberFormatException ex) {
-                    ex.printStackTrace(System.err);
-                }
-            }
-            break;
-
-            case LONG: {
-                try {
-                    if (this.shouldBeIncreased()) {
-                        return Long.parseLong(this.integerPart) + 1;
-                    } else {
-                        return Long.parseLong(this.integerPart);
-                    }
-                } catch (NumberFormatException ex) {
-                    ex.printStackTrace(System.err);
-                }
-            }
-            break;
-
-            case DOUBLE: {
-                try {
-                    return Double.parseDouble(this.getNumber());
-                } catch (NumberFormatException ex) {
-                    ex.printStackTrace(System.err);
-                }
-            }
-            break;
-
-            case FLOAT: {
-                try {
-                    return Float.parseFloat(this.getNumber());
-                } catch (NumberFormatException ex) {
-                    ex.printStackTrace(System.err);
-                }
-            }
-            break;
-        }
-        throw new IllegalArgumentException();
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DecimalNumber that = (DecimalNumber) o;
-        return fractionalPart.equals(that.fractionalPart) &&
-                integerPart.equals(that.integerPart);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(fractionalPart, integerPart);
-    }
 }

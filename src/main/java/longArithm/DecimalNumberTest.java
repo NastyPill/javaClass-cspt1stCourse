@@ -77,9 +77,9 @@ public class DecimalNumberTest {
         );
 
         Assert.assertEquals(
-                new DecimalNumber("2636397667664652779131978122363337044005025511.042108674361341663975922810294836"),
-                new DecimalNumber("19832479812697258390710987901870.10245651543234")
-                        .multiplication(new DecimalNumber("13245331234235730.1066112532656235354"), -1)
+                new DecimalNumber("2.0"),
+                new DecimalNumber("2.0")
+                        .multiplication(new DecimalNumber("1.0"))
         );
 
     }
